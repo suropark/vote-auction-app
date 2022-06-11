@@ -49,7 +49,7 @@ export const wrapSendContract = (sendProvider, contractAddress, abi) => {
         );
       }
     } else if (sendProvider.isKlip) {
-      const { requestKey } = await sendProvider.provider.klip.excuteContract({
+      const { requestKey } = await sendProvider.provider.excuteContract({
         method,
         abi: abi,
         constractAddress: contractAddress,
@@ -57,7 +57,7 @@ export const wrapSendContract = (sendProvider, contractAddress, abi) => {
         options,
       });
 
-      await sendProvider.klip.pollResult(requestKey);
+      await sendProvider.provider.pollResult(requestKey);
     }
   }
 

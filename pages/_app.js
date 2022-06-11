@@ -3,7 +3,8 @@ import "../styles/globals.css";
 import "antd/dist/antd.css";
 import Head from "next/head";
 import Layout from "../components/layout/layout";
-import { Web3Provider } from "../hooks/web3Provider";
+import { Web3ContextProvider } from "./web3Context";
+
 function MyApp({ Component, pageProps }) {
   return (
     <React.Fragment>
@@ -14,11 +15,11 @@ function MyApp({ Component, pageProps }) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <Web3Provider>
+      <Web3ContextProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </Web3Provider>
+      </Web3ContextProvider>
     </React.Fragment>
   );
 }

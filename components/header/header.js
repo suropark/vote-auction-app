@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./header.module.css";
 import { Layout, Col, Row } from "antd";
-import { useWeb3 } from "../../hooks/web3Provider";
+import { useWeb3 } from "../../pages/useWeb3";
+import { Web3Context } from "../../pages/web3Context";
 const { Header: LayoutHeader } = Layout;
 
 function Header() {
   const t = useWeb3();
-  console.log(t);
   return (
     <LayoutHeader className={classes.container}>
       <Row>

@@ -7,7 +7,7 @@ function Layout({ children }) {
   return (
     <div>
       <Head>
-        <link rel="icon" href="/favicon.png" />
+        {/* <link rel="icon" href="/favicon.png" />
         <link
           rel="preload"
           href="/fonts/Inter/Inter-Regular.ttf"
@@ -19,7 +19,7 @@ function Layout({ children }) {
           href="/fonts/Inter/Inter-Bold.ttf"
           as="font"
           crossOrigin=""
-        />
+        /> */}
         <meta name="description" content="Vote-Auction ??" />
         <meta name="og:title" content="Vote-Auction" />
         <meta name="twitter:card" content="summary_large_image" />

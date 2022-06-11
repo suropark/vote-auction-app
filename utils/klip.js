@@ -1,11 +1,18 @@
 import axios from "axios";
 import platform from "platform-detect";
-import { request } from "klip-sdk";
 
+import dynamic from "next/dynamic";
+
+const klipRequest = dynamic(
+  () => import("klip-sdk").then((mod) => mod.request),
+  {
+    ssr: false,
+  }
+);
 const SERVER_URL = "https://a2a-api.klipwallet.com";
 const PREPARE = "/v2/a2a/prepare";
 const RESULT = "/v2/a2a/result?request_key=";
-
+const BAPP = "Vote-Auction";
 async function prepare(params) {
   const { data } = await axios.post(`${SERVER_URL}${PREPARE}`, {
     params,
@@ -20,10 +27,16 @@ async function request(reqKey) {
     pc: `https://klipwallet.com/?target=/a2a?request_key=${reqKey}`,
   };
 
+  let os = "pc";
+  if (platform.android) {
+    os = "and";
+  } else if (platform.ios) {
+    os = "ios";
+  }
   if (os === "pc") {
     return urls["pc"];
   }
-  await request(reqKey);
+  await klipRequest(reqKey);
 
   return;
 }
@@ -32,6 +45,7 @@ export const getKlipProvider = (setQr, setModalOpen) => {
   async function enable() {
     const authParams = {
       type: "auth",
+      BAPP,
     };
     const data = await prepare(authParams);
     const requestKey = data["request_key"];
